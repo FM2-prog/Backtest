@@ -1,0 +1,6 @@
+{
+  "name": "QuantAudit AI",
+  "description": "AI-powered backtesting system for traders with behavioral auditing and keyboard-first UX.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["AI Analysis", "Data Visualization", "Backtesting"]
+}
