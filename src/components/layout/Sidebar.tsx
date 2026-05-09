@@ -19,7 +19,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, theme
   ];
 
   return (
-    <div className="w-56 h-screen bg-background border-r border-border flex flex-col p-4 gap-8">
+    <div className="w-56 h-screen bg-sidebar border-r border-border flex flex-col p-4 gap-8">
       <div className="flex items-center gap-3 px-2 py-4">
         <div className="w-8 h-8 bg-primary rounded-md flex items-center justify-center font-bold text-slate-950">QA</div>
         <div className="flex flex-col">
@@ -29,7 +29,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab, theme
 
       <div className="space-y-6">
         <div>
-          <p className="text-[10px] font-black text-foreground/50 dark:text-white/50 uppercase tracking-widest mb-4">Trading Terminal</p>
+          <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mb-4">Trading Terminal</p>
           <nav className="flex flex-col gap-1">
             {menuItems.map((item) => (
               <button

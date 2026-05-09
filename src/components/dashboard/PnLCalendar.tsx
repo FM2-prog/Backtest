@@ -74,7 +74,7 @@ export const PnLCalendar: React.FC<PnLCalendarProps> = ({ trades }) => {
     <Card className="bg-card border border-border rounded-xl overflow-hidden shadow-xl mb-10">
       <CardHeader className="p-4 border-b border-border bg-muted/30 flex flex-row items-center justify-between">
         <div className="flex items-center gap-4">
-          <CardTitle className="text-[10px] font-black text-foreground/50 uppercase tracking-widest flex items-center gap-2">
+          <CardTitle className="text-[10px] font-black text-muted-foreground uppercase tracking-widest flex items-center gap-2">
             <CalendarIcon className="h-4 w-4 text-primary" />
             Performance Calendar
           </CardTitle>

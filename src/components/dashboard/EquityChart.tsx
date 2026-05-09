@@ -40,7 +40,7 @@ export const EquityChart: React.FC<EquityChartProps> = ({ trades }) => {
   return (
     <Card className="bg-card border border-border rounded-xl overflow-hidden shadow-sm h-full flex flex-col">
       <CardHeader className="p-4 border-b border-border flex flex-row items-center justify-between bg-muted/30 shrink-0">
-        <CardTitle className="text-[10px] font-black text-foreground/50 dark:text-white/50 uppercase tracking-widest flex items-center gap-2">
+        <CardTitle className="text-[10px] font-black text-muted-foreground uppercase tracking-widest flex items-center gap-2">
           <Activity className="h-3 w-3 text-primary" />
           Equity Curve (Cumulative)
         </CardTitle>
@@ -68,8 +68,8 @@ export const EquityChart: React.FC<EquityChartProps> = ({ trades }) => {
             <AreaChart data={data} margin={{ top: 5, right: 20, bottom: 5, left: 20 }}>
               <defs>
                 <linearGradient id="colorEquity" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#38BDF8" stopOpacity={0.4}/>
-                  <stop offset="95%" stopColor="#020617" stopOpacity={0}/>
+                  <stop offset="5%" stopColor="var(--primary)" stopOpacity={0.4}/>
+                  <stop offset="95%" stopColor="var(--background)" stopOpacity={0}/>
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
@@ -92,9 +92,9 @@ export const EquityChart: React.FC<EquityChartProps> = ({ trades }) => {
                 style={{ fontWeight: 700, opacity: 0.5, fontFamily: 'monospace' }}
               />
               <Tooltip 
-                contentStyle={{ backgroundColor: '#020617', border: '1px solid var(--border)', borderRadius: '8px' }}
-                itemStyle={{ fontSize: '12px', fontWeight: 900, fontFamily: 'monospace' }}
-                labelStyle={{ color: 'var(--foreground)', fontSize: '10px', marginBottom: '4px', opacity: 0.7, fontWeight: 700 }}
+                contentStyle={{ backgroundColor: 'var(--card)', border: '1px solid var(--border)', borderRadius: '8px', color: 'var(--foreground)' }}
+                itemStyle={{ color: 'var(--foreground)', fontSize: '12px', fontWeight: 900, fontFamily: 'monospace' }}
+                labelStyle={{ color: 'var(--muted-foreground)', fontSize: '10px', marginBottom: '4px', fontWeight: 700 }}
                 formatter={(value: number, name: string, item: any) => {
                   return [ 
                     `$${item.payload.balanceDollar.toLocaleString()} / ${item.payload.balancePct.toFixed(2)}%`, 
@@ -106,12 +106,12 @@ export const EquityChart: React.FC<EquityChartProps> = ({ trades }) => {
               <Area 
                 type="monotone" 
                 dataKey={metricMode === '$' ? "balanceDollar" : "balancePct"} 
-                stroke="#38BDF8" 
+                stroke="var(--primary)" 
                 strokeWidth={3} 
                 fillOpacity={1} 
                 fill="url(#colorEquity)"
                 dot={false}
-                activeDot={{ r: 6, strokeWidth: 0, fill: '#38BDF8' }}
+                activeDot={{ r: 6, strokeWidth: 0, fill: 'var(--primary)' }}
                 animationDuration={1000}
               />
             </AreaChart>

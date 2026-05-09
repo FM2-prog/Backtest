@@ -21,9 +21,9 @@ export const ChronologicalPerformance: React.FC<ChronologicalPerformanceProps> =
   return (
     <div className="space-y-6 pb-32">
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-black uppercase tracking-widest text-slate-100">Chronological Performance Hub</h2>
+        <h2 className="text-xl font-black uppercase tracking-widest text-foreground">Chronological Performance Hub</h2>
         <Tabs value={activeTab} onValueChange={(v: any) => setActiveTab(v)}>
-          <TabsList className="bg-slate-900 border border-slate-800">
+          <TabsList className="bg-muted border border-border">
             <TabsTrigger value="monthly" className="text-xs font-bold uppercase tracking-wider">Monthly Detail</TabsTrigger>
             <TabsTrigger value="yearly" className="text-xs font-bold uppercase tracking-wider">Yearly Matrix</TabsTrigger>
           </TabsList>
@@ -86,7 +86,7 @@ const MonthlyView: React.FC<{ trades: Trade[] }> = ({ trades }) => {
       <div className="xl:col-span-8 flex flex-col gap-4">
         <div className="flex items-center gap-4 h-9">
           <Select value={selectedYear.toString()} onValueChange={(v) => setSelectedYear(parseInt(v))}>
-            <SelectTrigger className="w-24 bg-slate-900 border-slate-800 text-slate-100 h-9 font-bold">
+            <SelectTrigger className="w-24 bg-input border-border text-foreground h-9 font-bold">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -94,7 +94,7 @@ const MonthlyView: React.FC<{ trades: Trade[] }> = ({ trades }) => {
             </SelectContent>
           </Select>
           <Select value={selectedMonth.toString()} onValueChange={(v) => setSelectedMonth(parseInt(v))}>
-            <SelectTrigger className="w-32 bg-slate-900 border-slate-800 text-slate-100 h-9 font-bold">
+            <SelectTrigger className="w-32 bg-input border-border text-foreground h-9 font-bold">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -103,16 +103,16 @@ const MonthlyView: React.FC<{ trades: Trade[] }> = ({ trades }) => {
           </Select>
         </div>
 
-        <Card className="bg-[#1C1C1C] border-[#2D2D2D] shadow-2xl overflow-hidden flex-1 flex flex-col">
+        <Card className="bg-card border-border shadow-sm overflow-hidden flex-1 flex flex-col">
           <CardContent className="p-4 flex-1">
              <div className="grid grid-cols-7 gap-2 h-full content-start">
                {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => (
-                 <div key={d} className="text-center text-[10px] font-black uppercase text-slate-500 py-2">
+                 <div key={d} className="text-center text-[10px] font-black uppercase text-muted-foreground py-2">
                    {d}
                  </div>
                ))}
                {Array.from({ length: startDayOfWeek }).map((_, i) => (
-                 <div key={`empty-start-${i}`} className="h-24 bg-slate-900/20 rounded-md border border-slate-800/30" />
+                 <div key={`empty-start-${i}`} className="h-24 bg-muted rounded-md border border-border opacity-50" />
                ))}
                {daysInMonth.map((day, i) => {
                  const key = format(day, 'yyyy-MM-dd');
@@ -124,25 +124,25 @@ const MonthlyView: React.FC<{ trades: Trade[] }> = ({ trades }) => {
                    <div 
                      key={i} 
                      className={`h-24 rounded-md border p-2 flex flex-col justify-between transition-colors
-                       ${isPositive ? 'bg-emerald-500/10 border-emerald-500/20' : 
-                         isNegative ? 'bg-red-500/10 border-red-500/20' : 
-                         'bg-[#020617]/50 border-[#2D2D2D]'}
+                       ${isPositive ? 'bg-success/5 border-success/30' : 
+                         isNegative ? 'bg-destructive/5 border-destructive/30' : 
+                         'bg-card border-border'}
                      `}
                    >
-                     <span className="text-xs font-black text-slate-500">{format(day, 'd')}</span>
+                     <span className="text-xs font-black text-muted-foreground">{format(day, 'd')}</span>
                      {data && data.count > 0 && (
                        <div className="flex flex-col items-end">
-                         <span className={`font-mono text-sm font-black ${isPositive ? 'text-emerald-400' : 'text-red-400'}`}>
+                         <span className={`font-mono text-sm font-black ${isPositive ? 'text-success' : 'text-destructive'}`}>
                            {data.pnl >= 0 ? '+' : '-'}${Math.abs(data.pnl).toFixed(2)}
                          </span>
-                         <span className="text-[9px] text-slate-500 font-bold uppercase">{data.count} {data.count === 1 ? 'trade' : 'trades'}</span>
+                         <span className="text-[9px] text-muted-foreground font-bold uppercase">{data.count} {data.count === 1 ? 'trade' : 'trades'}</span>
                        </div>
                      )}
                    </div>
                  );
                })}
                 {Array.from({ length: (7 - ((startDayOfWeek + daysInMonth.length) % 7)) % 7 }).map((_, i) => (
-                 <div key={`empty-end-${i}`} className="h-24 bg-slate-900/20 rounded-md border border-slate-800/30" />
+                 <div key={`empty-end-${i}`} className="h-24 bg-muted rounded-md border border-border opacity-50" />
                ))}
              </div>
           </CardContent>
@@ -150,7 +150,7 @@ const MonthlyView: React.FC<{ trades: Trade[] }> = ({ trades }) => {
       </div>
 
       <div className="xl:col-span-4 flex flex-col gap-4">
-        <h3 className="text-sm font-black uppercase tracking-widest text-slate-300 h-9 flex items-center">P&L By Week - {MONTHS[selectedMonth]} {selectedYear}</h3>
+        <h3 className="text-sm font-black uppercase tracking-widest text-muted-foreground h-9 flex items-center">P&L By Week - {MONTHS[selectedMonth]} {selectedYear}</h3>
         <div className="flex flex-col justify-between flex-1 gap-2">
           <div className="flex flex-col gap-2">
             {Array.from({ length: Math.max(5, Math.max(...Object.keys(weeklyData).map(k => parseInt(k)), 0)) }).map((_, i) => {
@@ -158,14 +158,14 @@ const MonthlyView: React.FC<{ trades: Trade[] }> = ({ trades }) => {
               const data = weeklyData[week] || { pnl: 0, count: 0 };
               const isPos = data.pnl >= 0;
               return (
-                <Card key={week} className={`border bg-[#0B1120] ${data.count > 0 ? (isPos ? 'border-emerald-500/30' : 'border-red-500/30') : 'border-[#2D2D2D]'}`}>
+                <Card key={week} className={`border bg-card ${data.count > 0 ? (isPos ? 'border-success/30' : 'border-destructive/30') : 'border-border'}`}>
                   <CardContent className="p-4 flex items-center justify-between">
-                    <span className="font-bold text-slate-300 text-xs uppercase tracking-wider">Week {week}</span>
+                    <span className="font-bold text-muted-foreground text-xs uppercase tracking-wider">Week {week}</span>
                     <div className="flex flex-col items-end">
-                      <span className={`font-mono font-black ${data.count > 0 ? (isPos ? 'text-emerald-400' : 'text-red-400') : 'text-slate-500'}`}>
+                      <span className={`font-mono font-black ${data.count > 0 ? (isPos ? 'text-success' : 'text-destructive') : 'text-muted-foreground'}`}>
                         {data.pnl >= 0 ? '' : '-'}${Math.abs(data.pnl).toFixed(2)}
                       </span>
-                      <span className="text-[9px] text-slate-500 uppercase font-bold">{data.count} Trades</span>
+                      <span className="text-[9px] text-muted-foreground uppercase font-bold">{data.count} Trades</span>
                     </div>
                   </CardContent>
                 </Card>
@@ -173,14 +173,14 @@ const MonthlyView: React.FC<{ trades: Trade[] }> = ({ trades }) => {
             })}
           </div>
           
-          <Card className={`mt-auto border bg-[#0B1120] ${monthCountVal > 0 ? (monthTotalVal >= 0 ? 'border-emerald-500/50' : 'border-red-500/50') : 'border-[#2D2D2D]'}`}>
+          <Card className={`mt-auto border bg-card ${monthCountVal > 0 ? (monthTotalVal >= 0 ? 'border-success/50' : 'border-destructive/50') : 'border-border'}`}>
             <CardContent className="p-4 flex items-center justify-between">
-              <span className="font-black text-slate-100 text-sm uppercase tracking-wider">Monthly Total</span>
+              <span className="font-black text-foreground text-sm uppercase tracking-wider">Monthly Total</span>
               <div className="flex flex-col items-end">
-                <span className={`font-mono text-lg font-black ${monthCountVal > 0 ? (monthTotalVal >= 0 ? 'text-emerald-400' : 'text-red-400') : 'text-slate-500'}`}>
+                <span className={`font-mono text-lg font-black ${monthCountVal > 0 ? (monthTotalVal >= 0 ? 'text-success' : 'text-destructive') : 'text-muted-foreground'}`}>
                   {monthTotalVal >= 0 ? '' : '-'}${Math.abs(monthTotalVal).toFixed(2)}
                 </span>
-                <span className="text-[10px] text-slate-400 uppercase font-bold">{monthCountVal} Trades</span>
+                <span className="text-[10px] text-muted-foreground/70 uppercase font-bold">{monthCountVal} Trades</span>
               </div>
             </CardContent>
           </Card>
@@ -226,13 +226,13 @@ const YearlyView: React.FC<{ trades: Trade[] }> = ({ trades }) => {
 
   return (
     <div className="flex flex-col gap-8">
-      <Card className="bg-[#1C1C1C] border-[#2D2D2D] shadow-2xl overflow-hidden">
-        <CardHeader className="flex flex-row items-center justify-between pb-4 border-b border-[#2D2D2D]">
-          <CardTitle className="text-sm uppercase font-black text-slate-200 tracking-widest">
+      <Card className="bg-card border-border shadow-sm overflow-hidden">
+        <CardHeader className="flex flex-row items-center justify-between pb-4 border-b border-border">
+          <CardTitle className="text-sm uppercase font-black text-foreground tracking-widest">
             Percentage Profit by Month
           </CardTitle>
           <Tabs value={metric} onValueChange={(v: any) => setMetric(v)}>
-            <TabsList className="bg-slate-900 border border-slate-800">
+            <TabsList className="bg-muted border border-border">
               <TabsTrigger value="percent" className="text-[10px] font-bold uppercase tracking-wider">Percent</TabsTrigger>
               <TabsTrigger value="profit" className="text-[10px] font-bold uppercase tracking-wider">Profit</TabsTrigger>
               <TabsTrigger value="all" className="text-[10px] font-bold uppercase tracking-wider">All</TabsTrigger>
@@ -241,21 +241,21 @@ const YearlyView: React.FC<{ trades: Trade[] }> = ({ trades }) => {
         </CardHeader>
         <CardContent className="p-0 overflow-x-auto">
           <table className="w-full text-sm text-left whitespace-nowrap">
-            <thead className="bg-[#020617]/50 border-b border-[#2D2D2D]">
+            <thead className="bg-muted/50 border-b border-border">
               <tr>
-                <th className="px-4 py-3 font-black text-slate-400 uppercase tracking-wider text-[10px]">Year</th>
+                <th className="px-4 py-3 font-black text-muted-foreground uppercase tracking-wider text-[10px]">Year</th>
                 {MONTHS.map(m => (
-                  <th key={m} className="px-4 py-3 font-black text-slate-400 uppercase tracking-wider text-[10px] text-center">{m}</th>
+                  <th key={m} className="px-4 py-3 font-black text-muted-foreground uppercase tracking-wider text-[10px] text-center">{m}</th>
                 ))}
-                <th className="px-4 py-3 font-black text-slate-300 uppercase tracking-wider text-[10px] text-center bg-slate-900/30">YTD</th>
+                <th className="px-4 py-3 font-black text-foreground uppercase tracking-wider text-[10px] text-center bg-muted">YTD</th>
               </tr>
             </thead>
             <tbody>
               {availableYears.map(year => {
                 const rowData = yearlyMatrixData[year] || { totalRaw: 0, totalPct: 0, totalCount: 0 };
                 return (
-                  <tr key={year} className="border-b border-[#2D2D2D]/50 hover:bg-white/5 transition-colors">
-                    <td className="px-4 py-3 font-mono font-bold text-slate-300">{year}</td>
+                  <tr key={year} className="border-b border-border/50 hover:bg-muted/50 transition-colors">
+                    <td className="px-4 py-3 font-mono font-bold text-muted-foreground">{year}</td>
                     {Array.from({length: 12}).map((_, m) => {
                       const data = rowData[m] || { pnl: 0, pct: 0, count: 0 };
                       const isPos = data.pnl >= 0;
@@ -265,44 +265,44 @@ const YearlyView: React.FC<{ trades: Trade[] }> = ({ trades }) => {
                           {hasTrades ? (
                             <div className="flex flex-col items-center justify-center">
                               {(metric === 'all' || metric === 'percent') && (
-                                <span className={`font-mono text-xs font-black ${isPos ? 'text-emerald-400' : 'text-red-400'}`}>
+                                <span className={`font-mono text-xs font-black ${isPos ? 'text-success' : 'text-destructive'}`}>
                                   {data.pct.toFixed(2)}%
                                 </span>
                               )}
                               {metric === 'all' && (
-                                <span className="text-[9px] font-bold uppercase text-slate-500">{data.count} {data.count === 1 ? 'trade' : 'trades'}</span>
+                                <span className="text-[9px] font-bold uppercase text-muted-foreground">{data.count} {data.count === 1 ? 'trade' : 'trades'}</span>
                               )}
                               {(metric === 'all' || metric === 'profit') && (
-                                <span className={`font-mono text-[10px] font-bold ${isPos ? 'text-emerald-500' : 'text-red-500'}`}>
+                                <span className={`font-mono text-[10px] font-bold ${isPos ? 'text-success' : 'text-destructive'}`}>
                                   ${data.pnl.toFixed(2)}
                                 </span>
                               )}
                             </div>
                           ) : (
-                            <span className="text-slate-600 font-mono text-sm">-</span>
+                            <span className="text-muted-foreground/50 font-mono text-sm">-</span>
                           )}
                         </td>
                       );
                     })}
-                    <td className="px-4 py-3 text-center bg-slate-900/30">
+                    <td className="px-4 py-3 text-center bg-muted">
                       {rowData.totalCount > 0 ? (
                         <div className="flex flex-col items-center justify-center">
                           {(metric === 'all' || metric === 'percent') && (
-                            <span className={`font-mono text-sm font-black ${rowData.totalRaw >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                            <span className={`font-mono text-sm font-black ${rowData.totalRaw >= 0 ? 'text-success' : 'text-destructive'}`}>
                               {rowData.totalPct.toFixed(2)}%
                             </span>
                           )}
                           {metric === 'all' && (
-                            <span className="text-[9px] font-bold uppercase text-slate-500">{rowData.totalCount} trades</span>
+                            <span className="text-[9px] font-bold uppercase text-muted-foreground">{rowData.totalCount} trades</span>
                           )}
                           {(metric === 'all' || metric === 'profit') && (
-                            <span className={`font-mono text-xs font-bold ${rowData.totalRaw >= 0 ? 'text-emerald-500' : 'text-red-500'}`}>
+                            <span className={`font-mono text-xs font-bold ${rowData.totalRaw >= 0 ? 'text-success' : 'text-destructive'}`}>
                               ${rowData.totalRaw.toFixed(2)}
                             </span>
                           )}
                         </div>
                       ) : (
-                        <span className="text-slate-600 font-mono text-sm">-</span>
+                        <span className="text-muted-foreground/50 font-mono text-sm">-</span>
                       )}
                     </td>
                   </tr>
@@ -315,14 +315,14 @@ const YearlyView: React.FC<{ trades: Trade[] }> = ({ trades }) => {
 
       <div className="flex items-center gap-4">
         <Select value={selectedYearView.toString()} onValueChange={(v) => setSelectedYearView(parseInt(v))}>
-          <SelectTrigger className="w-32 bg-slate-900 border-slate-800 text-slate-100 h-9 font-bold">
+          <SelectTrigger className="w-32 bg-input border-border text-foreground h-9 font-bold">
              <SelectValue />
           </SelectTrigger>
           <SelectContent>
              {availableYears.map(y => <SelectItem key={y} value={y.toString()}>{y}</SelectItem>)}
           </SelectContent>
         </Select>
-        <span className="text-xs uppercase font-black tracking-widest text-slate-500">Yearly Overview Heatmap</span>
+        <span className="text-xs uppercase font-black tracking-widest text-muted-foreground">Yearly Overview Heatmap</span>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
@@ -357,10 +357,10 @@ const MiniCalendar: React.FC<{ year: number, month: number, trades: Trade[] }> =
 
   return (
     <div className="flex flex-col gap-2">
-      <h4 className="text-[11px] font-black uppercase text-slate-300 text-center tracking-widest mb-1">{MONTHS[month]} {year}</h4>
+      <h4 className="text-[11px] font-black uppercase text-muted-foreground text-center tracking-widest mb-1">{MONTHS[month]} {year}</h4>
       <div className="grid grid-cols-7 gap-1">
         {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((d, i) => (
-          <div key={`${d}-${i}`} className="text-center text-[8px] font-black text-slate-600 uppercase mb-1">
+          <div key={`${d}-${i}`} className="text-center text-[8px] font-black text-muted-foreground/70 uppercase mb-1">
             {d}
           </div>
         ))}
@@ -373,7 +373,7 @@ const MiniCalendar: React.FC<{ year: number, month: number, trades: Trade[] }> =
            
            if (!data) {
              return (
-               <div key={i} className="aspect-square flex items-center justify-center text-[8px] text-slate-700 font-mono hover:bg-slate-800 rounded transition-colors cursor-default">
+               <div key={i} className="aspect-square bg-muted/30 border border-border flex items-center justify-center text-[8px] text-muted-foreground/50 font-mono hover:bg-muted/50 rounded transition-colors cursor-default">
                  {format(day, 'd')}
                </div>
              )
@@ -384,7 +384,7 @@ const MiniCalendar: React.FC<{ year: number, month: number, trades: Trade[] }> =
              <div 
                key={i} 
                className={`aspect-square flex items-center justify-center text-[7px] font-mono font-bold rounded cursor-default border group relative
-                 ${isPos ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30 hover:bg-emerald-500/30' : 'bg-red-500/20 text-red-400 border-red-500/30 hover:bg-red-500/30'}
+                 ${isPos ? 'bg-success/5 text-success border-success/30 hover:bg-success/20' : 'bg-destructive/5 text-destructive border-destructive/30 hover:bg-destructive/20'}
                `}
                title={`$${data.pnl.toFixed(2)} (${data.pct.toFixed(2)}%)`}
              >

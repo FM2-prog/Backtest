@@ -106,7 +106,7 @@ export const GeminiAssistant: React.FC<GeminiAssistantProps> = ({ isOpen, onClos
             className={cn(
               "shadow-2xl flex flex-col transition-colors",
               isSidebarVariant 
-                ? "w-full h-full bg-[#161B22] border-0" 
+                ? "w-full h-full bg-sidebar border-0" 
                 : "fixed right-0 top-0 h-screen w-[400px] z-[60] bg-background border-l border-border"
             )}
           >

@@ -41,7 +41,7 @@ export const MetricsHeader: React.FC<MetricsHeaderProps> = ({ stats }) => {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+    <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 mb-8">
       {metrics.map((m, i) => (
         <motion.div
           key={m.label}
@@ -53,13 +53,13 @@ export const MetricsHeader: React.FC<MetricsHeaderProps> = ({ stats }) => {
             <CardContent className="p-5">
               <div className="flex justify-between items-start">
                 <div>
-                  <p className="text-[10px] font-black text-[#CBD5E1] dark:text-[#CBD5E1] uppercase tracking-widest mb-2">{m.label}</p>
+                  <p className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mb-2">{m.label}</p>
                   <div className="flex items-baseline gap-2">
-                    <h3 className={cn("text-2xl font-black font-mono tracking-tighter text-white", m.color)}>
+                    <h3 className={cn("text-2xl font-black font-mono tracking-tighter", m.color || "text-foreground")}>
                       {m.value}
                     </h3>
                   </div>
-                  <p className="text-[10px] text-[#94A3B8] mt-2 font-mono font-bold">{m.sub}</p>
+                  <p className="text-[10px] text-muted-foreground mt-2 font-mono font-bold">{m.sub}</p>
                 </div>
                 <div className={cn("p-2 rounded-lg bg-muted border border-border shadow-inner", m.color)}>
                   <m.icon className="h-4 w-4" />

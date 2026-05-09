@@ -6,6 +6,7 @@ import { EquityChart } from './components/dashboard/EquityChart';
 import { LogHistory } from './components/dashboard/LogHistory';
 import { StrategyRepository } from './components/dashboard/StrategyRepository';
 import { ChronologicalPerformance } from './components/performance/ChronologicalPerformance';
+import { MonteCarloSimulation } from './components/performance/MonteCarloSimulation';
 import { PnLCalendar } from './components/dashboard/PnLCalendar';
 import { GeminiAssistant } from './components/dashboard/GeminiAssistant';
 import { TradingStats } from './types';
@@ -163,14 +164,14 @@ export default function App() {
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: 10 }}
-                      className="grid grid-cols-1 xl:grid-cols-4 gap-4 items-stretch w-full"
+                      className="grid grid-cols-1 lg:grid-cols-4 gap-4 items-stretch w-full"
                     >
-                      <div className="xl:col-span-1 flex flex-col">
+                      <div className="lg:col-span-1 flex flex-col">
                         <div className="w-full h-full flex flex-col">
                           <TradeForm />
                         </div>
                       </div>
-                      <div className="xl:col-span-3 flex flex-col overflow-hidden">
+                      <div className="lg:col-span-3 flex flex-col overflow-hidden">
                         <div className="w-full h-full flex flex-col">
                           <EquityChart trades={filteredTrades} />
                         </div>
@@ -211,16 +212,18 @@ export default function App() {
                     </motion.div>
                   )}
 
-                  {activeTab === 'performance' && (
-                    <motion.div
-                      key="performance"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                    >
-                      <ChronologicalPerformance trades={filteredTrades} />
-                    </motion.div>
-                  )}
+              {activeTab === 'performance' && (
+                <motion.div
+                  key="performance"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="flex flex-col gap-8"
+                >
+                  <MonteCarloSimulation trades={filteredTrades} />
+                  <ChronologicalPerformance trades={filteredTrades} />
+                </motion.div>
+              )}
                 </AnimatePresence>
               </div>
             </Tabs>

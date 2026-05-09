@@ -82,15 +82,15 @@ export const LogHistory = () => {
   return (
     <div className="flex flex-col space-y-6">
       {/* Control Panel */}
-      <div className="sticky top-0 z-20 bg-[#161B22] border border-white/5 rounded-xl p-4 shadow-xl mb-6">
+      <div className="sticky top-0 z-20 bg-card border border-border rounded-xl p-4 shadow-sm mb-6">
         <div className="flex flex-wrap items-center gap-4">
           {/* Account Selector */}
           <div className="flex-1 min-w-[150px]">
             <Select value={accountFilter} onValueChange={setAccountFilter}>
-              <SelectTrigger className="bg-[#000000] border-white/10 h-10 text-xs font-bold focus:ring-primary">
+              <SelectTrigger className="bg-input border-border h-10 text-xs font-bold focus:ring-primary">
                 <SelectValue placeholder="Select Strategy" />
               </SelectTrigger>
-              <SelectContent className="bg-[#161B22] border-white/10 text-white">
+              <SelectContent className="bg-popover border-border text-popover-foreground">
                 <SelectItem value="all">All Strategies</SelectItem>
                 {strategies.map(s => (
                   <SelectItem key={s.id} value={s.id}>{s.name}</SelectItem>
@@ -102,10 +102,10 @@ export const LogHistory = () => {
           {/* Setup Selector */}
           <div className="flex-1 min-w-[150px]">
             <Select value={setupFilter} onValueChange={setSetupFilter}>
-              <SelectTrigger className="bg-[#000000] border-white/10 h-10 text-xs font-bold focus:ring-primary">
+              <SelectTrigger className="bg-input border-border h-10 text-xs font-bold focus:ring-primary">
                 <SelectValue placeholder="All Tags" />
               </SelectTrigger>
-              <SelectContent className="bg-[#161B22] border-white/10 text-white">
+              <SelectContent className="bg-popover border-border text-popover-foreground">
                 <SelectItem value="all">All Tags</SelectItem>
                 <SelectItem value="Calm">Calm</SelectItem>
                 <SelectItem value="FOMO">FOMO Entry</SelectItem>
@@ -121,23 +121,23 @@ export const LogHistory = () => {
               placeholder="Search Ticket ID..." 
               value={searchTicket}
               onChange={(e) => setSearchTicket(e.target.value)}
-              className="pl-9 bg-[#000000] border-white/10 h-10 text-xs focus:ring-primary"
+              className="pl-9 bg-input border-border h-10 text-xs focus:ring-primary text-foreground placeholder:text-muted-foreground"
             />
           </div>
 
           {/* Date Range */}
-          <div className="flex items-center gap-2 bg-[#000000] border border-white/10 rounded-md px-3 h-10 w-[240px]">
+          <div className="flex items-center gap-2 bg-input border border-border rounded-md px-3 h-10 w-[240px]">
             <Calendar className="h-3.5 w-3.5 text-slate-500" />
             <input 
               type="date" 
-              className="bg-transparent border-none text-[10px] text-white focus:ring-0 w-full font-mono"
+              className="bg-transparent border-none text-[10px] text-foreground focus:ring-0 w-full font-mono"
               value={dateRange.start}
               onChange={(e) => setDateRange({...dateRange, start: e.target.value})}
             />
-            <span className="text-slate-600">-</span>
+            <span className="text-muted-foreground">-</span>
             <input 
               type="date" 
-              className="bg-transparent border-none text-[10px] text-white focus:ring-0 w-full font-mono"
+              className="bg-transparent border-none text-[10px] text-foreground focus:ring-0 w-full font-mono"
               value={dateRange.end}
               onChange={(e) => setDateRange({...dateRange, end: e.target.value})}
             />
@@ -147,7 +147,7 @@ export const LogHistory = () => {
           <Button 
             variant="ghost" 
             onClick={resetFilters}
-            className="text-[#FF4C4C] hover:text-[#FF4C4C] hover:bg-[#FF4C4C]/10 text-[10px] font-black uppercase tracking-widest h-10 px-4"
+            className="text-destructive hover:text-destructive hover:bg-destructive/10 text-[10px] font-black uppercase tracking-widest h-10 px-4"
           >
             <XCircle className="h-4 w-4 mr-2" />
             Clear All
@@ -156,16 +156,16 @@ export const LogHistory = () => {
       </div>
 
       {/* Data Grid */}
-      <div className="bg-[#1C1C1C] rounded-xl border border-white/5 overflow-hidden shadow-2xl relative grainy-texture">
+      <div className="bg-card rounded-xl border border-border overflow-hidden shadow-sm relative grainy-texture">
         <Table>
-          <TableHeader className="bg-[#000000]/40">
-            <TableRow className="border-white/5 hover:bg-transparent">
-              <TableHead className="text-[10px] uppercase font-black text-slate-500 tracking-widest">Ticket</TableHead>
-              <TableHead className="text-[10px] uppercase font-black text-slate-500 tracking-widest">Date & Time</TableHead>
-              <TableHead className="text-[10px] uppercase font-black text-slate-500 tracking-widest">Strategy</TableHead>
-              <TableHead className="text-[10px] uppercase font-black text-slate-500 tracking-widest">Asset/Pair</TableHead>
-              <TableHead className="text-[10px] uppercase font-black text-slate-500 tracking-widest">Execution</TableHead>
-              <TableHead className="text-[10px] uppercase font-black text-slate-500 tracking-widest text-right">PnL</TableHead>
+          <TableHeader className="bg-muted w-full">
+            <TableRow className="border-border hover:bg-transparent">
+              <TableHead className="text-[10px] uppercase font-black text-muted-foreground tracking-widest">Ticket</TableHead>
+              <TableHead className="text-[10px] uppercase font-black text-muted-foreground tracking-widest">Date & Time</TableHead>
+              <TableHead className="text-[10px] uppercase font-black text-muted-foreground tracking-widest">Strategy</TableHead>
+              <TableHead className="text-[10px] uppercase font-black text-muted-foreground tracking-widest">Asset/Pair</TableHead>
+              <TableHead className="text-[10px] uppercase font-black text-muted-foreground tracking-widest">Execution</TableHead>
+              <TableHead className="text-[10px] uppercase font-black text-muted-foreground tracking-widest text-right">PnL</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -175,7 +175,7 @@ export const LogHistory = () => {
                 return (
                   <TableRow 
                     key={trade.id} 
-                    className="border-white/5 hover:bg-[#2D2D2D]/50 transition-colors cursor-pointer group"
+                    className="border-border hover:bg-muted transition-colors cursor-pointer group"
                   >
                     <TableCell className="font-mono text-[10px] text-blue-400 font-bold tracking-tight">
                       {trade.id}
@@ -184,11 +184,11 @@ export const LogHistory = () => {
                       {new Date(trade.timestamp).toLocaleString()}
                     </TableCell>
                     <TableCell>
-                      <Badge variant="outline" className="bg-white/5 border-white/10 text-[8px] font-black uppercase tracking-tighter h-5">
+                      <Badge variant="outline" className="bg-muted border-border text-[8px] font-black uppercase tracking-tighter h-5 text-foreground">
                         {strategy?.name || 'Unknown'}
                       </Badge>
                     </TableCell>
-                    <TableCell className="text-[10px] font-black text-white">
+                    <TableCell className="text-[10px] font-black text-foreground">
                       {trade.pair}
                     </TableCell>
                     <TableCell className="text-[10px] text-slate-400 uppercase font-bold">
@@ -196,7 +196,7 @@ export const LogHistory = () => {
                         {trade.side}
                       </span>
                     </TableCell>
-                    <TableCell className={`text-right font-mono font-black text-[11px] ${trade.pnl >= 0 ? 'text-[#39FF14]' : 'text-[#FF3333]'}`}>
+                    <TableCell className={`text-right font-mono font-black text-[11px] ${trade.pnl >= 0 ? 'text-success' : 'text-destructive'}`}>
                       {trade.pnl >= 0 ? '+' : ''}{trade.pnl.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
                       <span className="ml-2 opacity-50 text-[9px]">({trade.pnlPercentage.toFixed(2)}%)</span>
                     </TableCell>
@@ -209,13 +209,13 @@ export const LogHistory = () => {
                   <div className="flex flex-col items-center justify-center space-y-3 opacity-50">
                     <History className="h-10 w-10 text-slate-700" />
                     <div>
-                      <p className="text-sm font-bold text-white mb-1">No trades found matching the current filters</p>
-                      <p className="text-[10px] uppercase font-black text-slate-500 tracking-widest">Adjust criteria to refine search</p>
+                      <p className="text-sm font-bold text-foreground mb-1">No trades found matching the current filters</p>
+                      <p className="text-[10px] uppercase font-black text-muted-foreground tracking-widest">Adjust criteria to refine search</p>
                     </div>
                     <Button 
                       variant="outline" 
                       onClick={resetFilters}
-                      className="mt-4 border-white/10 hover:bg-white/5 h-8 text-[9px] font-black uppercase tracking-widest"
+                      className="mt-4 border-border hover:bg-muted h-8 text-[9px] font-black uppercase tracking-widest"
                     >
                       Reset All Filters
                     </Button>

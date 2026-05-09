@@ -122,11 +122,11 @@ export const TradeForm: React.FC = () => {
   };
 
   return (
-    <Card className="bg-[#000000] border-[#ffffff] rounded-xl overflow-hidden shadow-sm grainy-texture relative h-full flex flex-col">
+    <Card className="bg-card border-border rounded-xl overflow-hidden shadow-sm grainy-texture relative h-full flex flex-col">
       <CardContent className="p-6 relative z-10 flex-1 flex flex-col justify-between">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div className="space-y-1">
-            <Label className="text-[10px] uppercase font-black text-foreground/50 dark:text-white/50 tracking-widest flex items-center gap-2">
+            <Label className="text-[10px] uppercase font-black text-muted-foreground tracking-widest flex items-center gap-2">
               <Briefcase className="h-3 w-3 text-primary" /> Select Strategy *
             </Label>
             <Select onValueChange={(v) => setValue('strategyId', v)}>
@@ -143,13 +143,13 @@ export const TradeForm: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-1">
-              <Label htmlFor="entryTimestamp" className="text-[10px] uppercase font-black text-foreground/50 dark:text-white/50 tracking-widest flex items-center gap-2">
+              <Label htmlFor="entryTimestamp" className="text-[10px] uppercase font-black text-muted-foreground tracking-widest flex items-center gap-2">
                 <Calendar className="h-3 w-3 text-primary" /> Entry Date
               </Label>
               <Input id="entryTimestamp" type="date" {...register('entryTimestamp')} className="bg-input border-border h-9 font-mono text-xs font-bold" />
             </div>
             <div className="space-y-1">
-              <Label htmlFor="lots" className="text-[10px] uppercase font-black text-foreground/50 dark:text-white/50 tracking-widest flex items-center gap-2">
+              <Label htmlFor="lots" className="text-[10px] uppercase font-black text-muted-foreground tracking-widest flex items-center gap-2">
                 <Coins className="h-3 w-3 text-primary" /> Lots
               </Label>
               <Input id="lots" type="number" step="0.01" {...register('lots')} className="bg-input border-border h-9 font-mono text-xs font-bold" placeholder="0.10" />
@@ -158,11 +158,11 @@ export const TradeForm: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-1">
-              <Label htmlFor="pair" className="text-[10px] uppercase font-black text-foreground/50 dark:text-white/50 tracking-widest">Active Asset</Label>
+              <Label htmlFor="pair" className="text-[10px] uppercase font-black text-muted-foreground tracking-widest">Active Asset</Label>
               <Input id="pair" tabIndex={1} {...register('pair')} className="bg-input border-border h-9 font-mono text-xs font-bold focus:ring-1 focus:ring-primary" placeholder="BTCUSD" />
             </div>
             <div className="space-y-1">
-              <Label className="text-[10px] uppercase font-black text-foreground/50 dark:text-white/50 tracking-widest">Execution</Label>
+              <Label className="text-[10px] uppercase font-black text-muted-foreground tracking-widest">Execution</Label>
               <Select onValueChange={(v) => setValue('side', v)} defaultValue="long">
                 <SelectTrigger tabIndex={2} className="bg-input border-border h-9 text-xs font-bold">
                   <SelectValue placeholder="Side" />
@@ -175,34 +175,38 @@ export const TradeForm: React.FC = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 border-t border-border pt-4">
-            <div className="space-y-1">
-              <Label htmlFor="entryPrice" className="text-[10px] uppercase font-black text-foreground/50 dark:text-white/50 tracking-widest">Entry Price</Label>
-              <Input id="entryPrice" tabIndex={3} type="number" step="0.00000001" {...register('entryPrice', { required: true })} className="bg-input border-border h-9 font-mono text-xs text-primary font-black w-full" />
+          <div className="grid grid-cols-2 gap-x-6 border-t border-border pt-4">
+            <div className="flex flex-col gap-y-4">
+              <div className="space-y-1">
+                <Label htmlFor="entryPrice" className="text-[10px] uppercase font-black text-muted-foreground tracking-widest">Entry Price</Label>
+                <Input id="entryPrice" tabIndex={3} type="number" step="0.00000001" {...register('entryPrice', { required: true })} className="bg-input border-border h-9 font-mono text-xs text-primary font-black w-full" />
+              </div>
+              <div className="space-y-1 min-w-[100px]">
+                <Label htmlFor="entryTime" className="text-[10px] uppercase font-black text-muted-foreground tracking-widest">Entry Time</Label>
+                <Input id="entryTime" tabIndex={4} value={watch('entryTime') || ''} onChange={(e) => handleTimeInput(e, 'entryTime')} className="bg-input border-border h-9 font-mono text-xs font-black w-full tracking-[0.2em]" placeholder="HH:MM" />
+              </div>
             </div>
-            <div className="space-y-1 min-w-[100px]">
-              <Label htmlFor="entryTime" className="text-[10px] uppercase font-black text-foreground/50 dark:text-white/50 tracking-widest">Entry Time</Label>
-              <Input id="entryTime" tabIndex={4} value={watch('entryTime') || ''} onChange={(e) => handleTimeInput(e, 'entryTime')} className="bg-input border-border h-9 font-mono text-xs font-black w-full tracking-[0.2em]" placeholder="HH:MM" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="exitPrice" className="text-[10px] uppercase font-black text-foreground/50 dark:text-white/50 tracking-widest">Exit Price</Label>
-              <Input id="exitPrice" tabIndex={5} type="number" step="0.00000001" {...register('exitPrice', { required: true })} className="bg-input border-border h-9 font-mono text-xs font-black w-full" />
-            </div>
-            <div className="space-y-1 min-w-[100px]">
-              <Label htmlFor="exitTime" className="text-[10px] uppercase font-black text-foreground/50 dark:text-white/50 tracking-widest">Exit Time</Label>
-              <Input id="exitTime" tabIndex={6} value={watch('exitTime') || ''} onChange={(e) => handleTimeInput(e, 'exitTime')} className="bg-input border-border h-9 font-mono text-xs font-black w-full tracking-[0.2em]" placeholder="HH:MM" />
+            <div className="flex flex-col gap-y-4">
+              <div className="space-y-1">
+                <Label htmlFor="exitPrice" className="text-[10px] uppercase font-black text-muted-foreground tracking-widest">Exit Price</Label>
+                <Input id="exitPrice" tabIndex={5} type="number" step="0.00000001" {...register('exitPrice', { required: true })} className="bg-input border-border h-9 font-mono text-xs font-black w-full" />
+              </div>
+              <div className="space-y-1 min-w-[100px]">
+                <Label htmlFor="exitTime" className="text-[10px] uppercase font-black text-muted-foreground tracking-widest">Exit Time</Label>
+                <Input id="exitTime" tabIndex={6} value={watch('exitTime') || ''} onChange={(e) => handleTimeInput(e, 'exitTime')} className="bg-input border-border h-9 font-mono text-xs font-black w-full tracking-[0.2em]" placeholder="HH:MM" />
+              </div>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 border-t border-border pt-4">
             <div className="space-y-1">
-              <Label className="text-[10px] uppercase font-black text-foreground/50 dark:text-white/50 tracking-widest flex items-center gap-2">
+              <Label className="text-[10px] uppercase font-black text-muted-foreground tracking-widest flex items-center gap-2">
                 <Shield className="h-3 w-3 text-destructive" /> SL
               </Label>
               <Input id="stopLoss" tabIndex={7} type="number" step="0.00000001" {...register('stopLoss')} className="bg-input border-border h-8 font-mono text-xs font-bold" />
             </div>
             <div className="space-y-1">
-              <Label className="text-[10px] uppercase font-black text-foreground/50 dark:text-white/50 tracking-widest flex items-center gap-2">
+              <Label className="text-[10px] uppercase font-black text-muted-foreground tracking-widest flex items-center gap-2">
                 <Target className="h-3 w-3 text-success" /> TP
               </Label>
               <Input id="takeProfit" tabIndex={8} type="number" step="0.00000001" {...register('takeProfit')} className="bg-input border-border h-8 font-mono text-xs font-bold" />
@@ -211,7 +215,7 @@ export const TradeForm: React.FC = () => {
 
           <div className="space-y-4 border-t border-border pt-4">
             <div className="space-y-1">
-              <Label className="text-[10px] uppercase font-black text-foreground/50 dark:text-white/50 tracking-widest">Psychology</Label>
+              <Label className="text-[10px] uppercase font-black text-muted-foreground tracking-widest">Psychology</Label>
               <Select onValueChange={(v) => setValue('emotion', v)} defaultValue="calm">
                 <SelectTrigger className="bg-input border-border h-9 text-xs font-bold">
                   <SelectValue />
@@ -248,24 +252,24 @@ export const TradeForm: React.FC = () => {
                   >
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-4 pb-2">
                       <div className="space-y-1">
-                        <Label className="text-[9px] uppercase font-bold text-foreground/50">TP (%)</Label>
+                        <Label className="text-[9px] uppercase font-bold text-muted-foreground">TP (%)</Label>
                         <Input type="number" step="0.1" {...register('tpPercent')} className="bg-input border-border h-8 text-[10px] font-bold" />
                       </div>
                       <div className="space-y-1">
-                        <Label className="text-[9px] uppercase font-bold text-foreground/50">SL (%)</Label>
+                        <Label className="text-[9px] uppercase font-bold text-muted-foreground">SL (%)</Label>
                         <Input type="number" step="0.1" {...register('slPercent')} className="bg-input border-border h-8 text-[10px] font-bold" />
                       </div>
                       <div className="space-y-1">
-                        <Label className="text-[9px] uppercase font-bold text-foreground/50">MAE (%)</Label>
+                        <Label className="text-[9px] uppercase font-bold text-muted-foreground">MAE (%)</Label>
                         <Input type="number" step="0.1" {...register('maePercent')} className="bg-input border-border h-8 text-[10px] font-bold" />
                       </div>
                       <div className="space-y-1">
-                        <Label className="text-[9px] uppercase font-bold text-foreground/50">MFE (%)</Label>
+                        <Label className="text-[9px] uppercase font-bold text-muted-foreground">MFE (%)</Label>
                         <Input type="number" step="0.1" {...register('mfePercent')} className="bg-input border-border h-8 text-[10px] font-bold" />
                       </div>
                     </div>
                     <div className="space-y-1 pt-2">
-                      <Label className="text-[9px] uppercase font-bold text-foreground/50 flex items-center gap-2">
+                      <Label className="text-[9px] uppercase font-bold text-muted-foreground flex items-center gap-2">
                         <MessageSquare className="h-2 w-2" /> Comments / Notes
                       </Label>
                       <Input {...register('notes')} placeholder="Trade journal details..." className="bg-input border-border h-9 text-xs font-bold" />

@@ -154,10 +154,10 @@ export const DeepAnalytics: React.FC<DeepAnalyticsProps> = ({ trades }) => {
   return (
     <div className="mt-12 space-y-8">
       <div className="flex items-center gap-2">
-        <div className="p-1.5 bg-[#38BDF8]/10 rounded border border-[#38BDF8]/20">
-          <Eye className="h-4 w-4 text-[#38BDF8]" />
+        <div className="p-1.5 bg-primary/10 rounded border border-primary/20">
+          <Eye className="h-4 w-4 text-primary" />
         </div>
-        <h3 className="text-[11px] font-black uppercase tracking-[0.2em] text-[#38BDF8]">Section 03: Deep Analytics</h3>
+        <h3 className="text-[11px] font-black uppercase tracking-[0.2em] text-primary">Section 03: Deep Analytics</h3>
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-12 gap-8">
@@ -170,23 +170,23 @@ export const DeepAnalytics: React.FC<DeepAnalyticsProps> = ({ trades }) => {
             { key: 'trades', label: 'Trades By Session' },
             { key: 'avgRR', label: 'Avg Profitable RR' }
           ].map(metric => (
-             <Card key={metric.key} className="bg-[#1C1C1C] border-[#2D2D2D] shadow-2xl grainy-texture relative overflow-hidden">
+             <Card key={metric.key} className="bg-card border-border shadow-sm grainy-texture relative overflow-hidden">
                <CardHeader className="pb-0 pt-4 px-4">
-                 <CardTitle className="text-[9px] uppercase font-black text-slate-500 tracking-widest text-center">
+                 <CardTitle className="text-[9px] uppercase font-black text-muted-foreground tracking-widest text-center">
                    {metric.label}
                  </CardTitle>
                </CardHeader>
                <CardContent className="h-[140px] flex items-center justify-center -mt-2">
                  <ResponsiveContainer width="100%" height="100%">
                    <RadarChart cx="50%" cy="50%" outerRadius="60%" data={radarChartData}>
-                     <PolarGrid stroke="#334155" />
-                     <PolarAngleAxis dataKey="session" tick={{ fill: '#94a3b8', fontSize: 10, fontFamily: 'monospace' }} />
+                     <PolarGrid stroke="var(--border)" />
+                     <PolarAngleAxis dataKey="session" tick={{ fill: 'var(--muted-foreground)', fontSize: 10, fontFamily: 'monospace' }} />
                      <PolarRadiusAxis angle={30} domain={['auto', 'auto']} tick={false} axisLine={false} />
                      <Radar
                        name={metric.label}
                        dataKey={metric.key}
-                       stroke="#38BDF8"
-                       fill="#38BDF8"
+                       stroke="var(--primary)"
+                       fill="var(--primary)"
                        fillOpacity={0.4}
                      />
                    </RadarChart>
@@ -200,20 +200,20 @@ export const DeepAnalytics: React.FC<DeepAnalyticsProps> = ({ trades }) => {
         <div className="xl:col-span-6 space-y-4">
           
           {/* MAE Distribution */}
-          <Card className="bg-[#1C1C1C] border-[#2D2D2D] shadow-2xl grainy-texture">
+          <Card className="bg-card border-border shadow-sm grainy-texture">
             <CardHeader className="flex flex-row items-center justify-between pb-2 px-5 pt-4">
                <div>
-                 <CardTitle className="text-[10px] uppercase font-black text-slate-400 tracking-widest flex items-center gap-2">
-                   <ArrowDownRight className="w-3 h-3 text-red-400" />
+                 <CardTitle className="text-[10px] uppercase font-black text-muted-foreground tracking-widest flex items-center gap-2">
+                   <ArrowDownRight className="w-3 h-3 text-destructive" />
                    Drawdown Stats (MAE)
                  </CardTitle>
                </div>
                <div className="flex items-center gap-2">
-                 <Badge variant="outline" className="font-mono text-xs border-red-500/30 text-red-400 bg-red-400/10 h-6">
+                 <Badge variant="outline" className="font-mono text-xs border-destructive/30 text-destructive bg-destructive/10 h-6">
                    Avg: {avgMae.toFixed(2)}%
                  </Badge>
                  <Select>
-                   <SelectTrigger className="h-6 w-6 p-0 flex items-center justify-center bg-transparent border-0 text-slate-400 hover:text-white [&>svg:first-child]:hidden shadow-none ring-0">
+                   <SelectTrigger className="h-6 w-6 p-0 flex items-center justify-center bg-transparent border-0 text-muted-foreground hover:text-foreground [&>svg:first-child]:hidden shadow-none ring-0">
                      <MoreHorizontal className="h-4 w-4" />
                    </SelectTrigger>
                    <SelectContent align="end">
@@ -224,12 +224,12 @@ export const DeepAnalytics: React.FC<DeepAnalyticsProps> = ({ trades }) => {
                </div>
             </CardHeader>
             <CardContent className="px-5 pb-4 space-y-4">
-              <BoxPlotBar data={maeData} color="#ef4444" />
+              <BoxPlotBar data={maeData} color="var(--destructive)" />
               <div className="h-10 mt-2">
                  <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={series}>
                        <YAxis hide domain={['dataMin', 'dataMax']} />
-                       <Line type="monotone" dataKey="mae" stroke="#ef4444" strokeWidth={1} dot={false} isAnimationActive={false} />
+                       <Line type="monotone" dataKey="mae" stroke="var(--destructive)" strokeWidth={1} dot={false} isAnimationActive={false} />
                     </LineChart>
                  </ResponsiveContainer>
               </div>
@@ -237,20 +237,20 @@ export const DeepAnalytics: React.FC<DeepAnalyticsProps> = ({ trades }) => {
           </Card>
 
           {/* MFE Distribution */}
-          <Card className="bg-[#1C1C1C] border-[#2D2D2D] shadow-2xl grainy-texture">
+          <Card className="bg-card border-border shadow-sm grainy-texture">
             <CardHeader className="flex flex-row items-center justify-between pb-2 px-5 pt-4">
                <div>
-                 <CardTitle className="text-[10px] uppercase font-black text-slate-400 tracking-widest flex items-center gap-2">
-                   <ArrowUpRight className="w-3 h-3 text-emerald-400" />
+                 <CardTitle className="text-[10px] uppercase font-black text-muted-foreground tracking-widest flex items-center gap-2">
+                   <ArrowUpRight className="w-3 h-3 text-success" />
                    Max Potential Profit (MFE)
                  </CardTitle>
                </div>
                <div className="flex items-center gap-2">
-                 <Badge variant="outline" className="font-mono text-xs border-emerald-500/30 text-emerald-400 bg-emerald-400/10 h-6">
+                 <Badge variant="outline" className="font-mono text-xs border-success/30 text-success bg-success/10 h-6">
                    Avg: {avgMfe.toFixed(2)}%
                  </Badge>
                  <Select>
-                   <SelectTrigger className="h-6 w-6 p-0 flex items-center justify-center bg-transparent border-0 text-slate-400 hover:text-white [&>svg:first-child]:hidden shadow-none ring-0">
+                   <SelectTrigger className="h-6 w-6 p-0 flex items-center justify-center bg-transparent border-0 text-muted-foreground hover:text-foreground [&>svg:first-child]:hidden shadow-none ring-0">
                      <MoreHorizontal className="h-4 w-4" />
                    </SelectTrigger>
                    <SelectContent align="end">
@@ -261,12 +261,12 @@ export const DeepAnalytics: React.FC<DeepAnalyticsProps> = ({ trades }) => {
                </div>
             </CardHeader>
             <CardContent className="px-5 pb-4 space-y-4">
-              <BoxPlotBar data={mfeData} color="#10b981" />
+              <BoxPlotBar data={mfeData} color="var(--success)" />
               <div className="h-10 mt-2">
                  <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={series}>
                        <YAxis hide domain={['dataMin', 'dataMax']} />
-                       <Line type="monotone" dataKey="mfe" stroke="#10b981" strokeWidth={1} dot={false} isAnimationActive={false} />
+                       <Line type="monotone" dataKey="mfe" stroke="var(--success)" strokeWidth={1} dot={false} isAnimationActive={false} />
                     </LineChart>
                  </ResponsiveContainer>
               </div>
@@ -274,20 +274,20 @@ export const DeepAnalytics: React.FC<DeepAnalyticsProps> = ({ trades }) => {
           </Card>
 
           {/* RR Distribution */}
-          <Card className="bg-[#1C1C1C] border-[#2D2D2D] shadow-2xl grainy-texture">
+          <Card className="bg-card border-border shadow-sm grainy-texture">
             <CardHeader className="flex flex-row items-center justify-between pb-2 px-5 pt-4">
                <div>
-                 <CardTitle className="text-[10px] uppercase font-black text-slate-400 tracking-widest flex items-center gap-2">
-                   <Target className="w-3 h-3 text-[#38BDF8]" />
+                 <CardTitle className="text-[10px] uppercase font-black text-muted-foreground tracking-widest flex items-center gap-2">
+                   <Target className="w-3 h-3 text-primary" />
                    Profitable RR Stats
                  </CardTitle>
                </div>
                <div className="flex items-center gap-2">
-                 <Badge variant="outline" className="font-mono text-xs border-[#38BDF8]/30 text-[#38BDF8] bg-[#38BDF8]/10 h-6">
+                 <Badge variant="outline" className="font-mono text-xs border-primary/30 text-primary bg-primary/10 h-6">
                    Avg: {avgRr.toFixed(2)}R
                  </Badge>
                  <Select>
-                   <SelectTrigger className="h-6 w-6 p-0 flex items-center justify-center bg-transparent border-0 text-slate-400 hover:text-white [&>svg:first-child]:hidden shadow-none ring-0">
+                   <SelectTrigger className="h-6 w-6 p-0 flex items-center justify-center bg-transparent border-0 text-muted-foreground hover:text-foreground [&>svg:first-child]:hidden shadow-none ring-0">
                      <MoreHorizontal className="h-4 w-4" />
                    </SelectTrigger>
                    <SelectContent align="end">
@@ -298,12 +298,12 @@ export const DeepAnalytics: React.FC<DeepAnalyticsProps> = ({ trades }) => {
                </div>
             </CardHeader>
             <CardContent className="px-5 pb-4 space-y-4">
-              <BoxPlotBar data={rrData} color="#38bdf8" />
+              <BoxPlotBar data={rrData} color="var(--primary)" />
               <div className="h-10 mt-2">
                  <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={series}>
                        <YAxis hide domain={['dataMin', 'dataMax']} />
-                       <Line type="monotone" dataKey="rr" stroke="#38bdf8" strokeWidth={1} dot={false} isAnimationActive={false} />
+                       <Line type="monotone" dataKey="rr" stroke="var(--primary)" strokeWidth={1} dot={false} isAnimationActive={false} />
                     </LineChart>
                  </ResponsiveContainer>
               </div>

@@ -16,15 +16,15 @@ export const TradeHistory: React.FC<TradeHistoryProps> = ({ trades }) => {
         <Table>
           <TableHeader className="bg-muted sticky top-0 z-10 shadow-sm border-b border-border">
             <TableRow className="border-border hover:bg-transparent">
-              <TableHead className="w-[100px] text-[10px] uppercase font-black text-[#CBD5E1] tracking-widest">Timestamp</TableHead>
-              <TableHead className="text-[10px] uppercase font-black text-[#CBD5E1] tracking-widest">Asset</TableHead>
-              <TableHead className="text-[10px] uppercase font-black text-[#CBD5E1] tracking-widest">Side</TableHead>
-              <TableHead className="text-[10px] uppercase font-black text-[#CBD5E1] tracking-widest text-right">Lots</TableHead>
-              <TableHead className="text-[10px] uppercase font-black text-[#CBD5E1] tracking-widest text-right">Entry</TableHead>
-              <TableHead className="text-[10px] uppercase font-black text-[#CBD5E1] tracking-widest text-right">Exit</TableHead>
-              <TableHead className="text-[10px] uppercase font-black text-[#CBD5E1] tracking-widest text-right">PnL Δ</TableHead>
-              <TableHead className="text-[10px] uppercase font-black text-[#CBD5E1] tracking-widest">Metrics</TableHead>
-              <TableHead className="text-[10px] uppercase font-black text-[#CBD5E1] tracking-widest">Psych</TableHead>
+              <TableHead className="w-[100px] text-[10px] uppercase font-black text-muted-foreground tracking-widest">Timestamp</TableHead>
+              <TableHead className="text-[10px] uppercase font-black text-muted-foreground tracking-widest">Asset</TableHead>
+              <TableHead className="text-[10px] uppercase font-black text-muted-foreground tracking-widest">Side</TableHead>
+              <TableHead className="text-[10px] uppercase font-black text-muted-foreground tracking-widest text-right">Lots</TableHead>
+              <TableHead className="text-[10px] uppercase font-black text-muted-foreground tracking-widest text-right">Entry</TableHead>
+              <TableHead className="text-[10px] uppercase font-black text-muted-foreground tracking-widest text-right">Exit</TableHead>
+              <TableHead className="text-[10px] uppercase font-black text-muted-foreground tracking-widest text-right">PnL Δ</TableHead>
+              <TableHead className="text-[10px] uppercase font-black text-muted-foreground tracking-widest">Metrics</TableHead>
+              <TableHead className="text-[10px] uppercase font-black text-muted-foreground tracking-widest">Psych</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>

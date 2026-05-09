@@ -108,14 +108,14 @@ export const TemporalAnalytics: React.FC<TemporalAnalyticsProps> = ({ trades }) 
 
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
         {/* P&L By Time */}
-        <Card className="bg-[#1C1C1C] border-[#2D2D2D] shadow-2xl grainy-texture overflow-hidden relative">
+        <Card className="bg-card border-border shadow-sm grainy-texture overflow-hidden relative">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-[10px] uppercase font-black text-slate-400 tracking-widest flex items-center gap-2">
-              <Activity className="w-4 h-4 text-[#22C55E]" />
+            <CardTitle className="text-[10px] uppercase font-black text-muted-foreground tracking-widest flex items-center gap-2">
+              <Activity className="w-4 h-4 text-success" />
               P&L By Time
             </CardTitle>
             <Select value={timeGranularity} onValueChange={(val: '30m' | '1h') => setTimeGranularity(val)}>
-              <SelectTrigger className="w-32 h-8 text-xs bg-transparent border-slate-700 text-slate-300">
+              <SelectTrigger className="w-32 h-8 text-xs bg-transparent border-input text-foreground">
                 <SelectValue placeholder="Granularity" />
               </SelectTrigger>
               <SelectContent>
@@ -129,24 +129,24 @@ export const TemporalAnalytics: React.FC<TemporalAnalyticsProps> = ({ trades }) 
               <BarChart data={data.pnlByTime} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                 <XAxis 
                   dataKey="time" 
-                  tick={{ fill: '#64748b', fontSize: 10, fontFamily: 'monospace' }} 
+                  tick={{ fill: 'var(--muted-foreground)', fontSize: 10, fontFamily: 'monospace' }} 
                   axisLine={false} 
                   tickLine={false} 
                 />
                 <YAxis 
-                  tick={{ fill: '#64748b', fontSize: 10, fontFamily: 'monospace' }} 
+                  tick={{ fill: 'var(--muted-foreground)', fontSize: 10, fontFamily: 'monospace' }} 
                   axisLine={false} 
                   tickLine={false} 
                   tickFormatter={(val) => `$${val}`}
                 />
                 <Tooltip 
-                  cursor={{ fill: '#ffffff0a' }}
-                  contentStyle={{ backgroundColor: '#0f172a', borderColor: '#1e293b', fontFamily: 'monospace', fontSize: 12 }}
+                  cursor={{ fill: 'var(--muted)' }}
+                  contentStyle={{ backgroundColor: 'var(--card)', borderColor: 'var(--border)', fontFamily: 'monospace', fontSize: 12 }}
                   formatter={(val: number) => [`$${val.toFixed(2)}`, 'P&L']}
                 />
                 <Bar dataKey="pnl" radius={[4, 4, 0, 0]}>
                   {data.pnlByTime.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.pnl >= 0 ? '#22C55E' : '#EF4444'} />
+                    <Cell key={`cell-${index}`} fill={entry.pnl >= 0 ? 'var(--success)' : 'var(--destructive)'} />
                   ))}
                 </Bar>
               </BarChart>
@@ -155,15 +155,15 @@ export const TemporalAnalytics: React.FC<TemporalAnalyticsProps> = ({ trades }) 
         </Card>
 
         {/* P&L By Day */}
-        <Card className="bg-[#1C1C1C] border-[#2D2D2D] shadow-2xl grainy-texture overflow-hidden relative">
+        <Card className="bg-card border-border shadow-sm grainy-texture overflow-hidden relative">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-[10px] uppercase font-black text-slate-400 tracking-widest flex items-center gap-2">
+            <CardTitle className="text-[10px] uppercase font-black text-muted-foreground tracking-widest flex items-center gap-2">
               <Calendar className="w-4 h-4 text-emerald-400" />
               P&L By Day
             </CardTitle>
             <div className="flex items-center gap-2">
-              <Label className="text-[10px] uppercase text-slate-500 font-bold">{separateDays ? 'Separate' : 'Total'}</Label>
-              <Switch checked={separateDays} onCheckedChange={setSeparateDays} className="scale-75 data-[state=checked]:bg-emerald-500" />
+              <Label className="text-[10px] uppercase text-muted-foreground font-bold">{separateDays ? 'Separate' : 'Total'}</Label>
+              <Switch checked={separateDays} onCheckedChange={setSeparateDays} className="scale-75 data-[state=checked]:bg-success" />
             </div>
           </CardHeader>
           <CardContent className="h-64 px-4 pb-0">
@@ -171,29 +171,29 @@ export const TemporalAnalytics: React.FC<TemporalAnalyticsProps> = ({ trades }) 
               <BarChart data={data.daysData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                 <XAxis 
                   dataKey="day" 
-                  tick={{ fill: '#64748b', fontSize: 10, fontFamily: 'monospace' }} 
+                  tick={{ fill: 'var(--muted-foreground)', fontSize: 10, fontFamily: 'monospace' }} 
                   axisLine={false} 
                   tickLine={false} 
                 />
                 <YAxis 
-                  tick={{ fill: '#64748b', fontSize: 10, fontFamily: 'monospace' }} 
+                  tick={{ fill: 'var(--muted-foreground)', fontSize: 10, fontFamily: 'monospace' }} 
                   axisLine={false} 
                   tickLine={false} 
                   tickFormatter={(val) => `$${val}`}
                 />
                 <Tooltip 
-                  cursor={{ fill: '#ffffff0a' }}
-                  contentStyle={{ backgroundColor: '#0f172a', borderColor: '#1e293b', fontFamily: 'monospace', fontSize: 12 }}
+                  cursor={{ fill: 'var(--muted)' }}
+                  contentStyle={{ backgroundColor: 'var(--card)', borderColor: 'var(--border)', fontFamily: 'monospace', fontSize: 12 }}
                 />
                 {separateDays ? (
                   <>
-                    <Bar dataKey="gains" name="Gains" fill="#22C55E" radius={[4, 4, 0, 0]} />
-                    <Bar dataKey="losses" name="Losses" fill="#EF4444" radius={[4, 4, 0, 0]} />
+                    <Bar dataKey="gains" name="Gains" fill="var(--success)" radius={[4, 4, 0, 0]} />
+                    <Bar dataKey="losses" name="Losses" fill="var(--destructive)" radius={[4, 4, 0, 0]} />
                   </>
                 ) : (
                   <Bar dataKey="totalPnl" name="Net P&L" radius={[4, 4, 0, 0]}>
                     {data.daysData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.totalPnl >= 0 ? '#22C55E' : '#EF4444'} />
+                      <Cell key={`cell-${index}`} fill={entry.totalPnl >= 0 ? 'var(--success)' : 'var(--destructive)'} />
                     ))}
                   </Bar>
                 )}
@@ -203,10 +203,10 @@ export const TemporalAnalytics: React.FC<TemporalAnalyticsProps> = ({ trades }) 
         </Card>
 
         {/* Trade Distribution by Day */}
-        <Card className="bg-[#1C1C1C] border-[#2D2D2D] shadow-2xl grainy-texture overflow-hidden relative xl:col-span-1">
+        <Card className="bg-card border-border shadow-sm grainy-texture overflow-hidden relative xl:col-span-1">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-[10px] uppercase font-black text-slate-400 tracking-widest flex items-center gap-2">
-              <Activity className="w-4 h-4 text-[#38BDF8]" />
+            <CardTitle className="text-[10px] uppercase font-black text-muted-foreground tracking-widest flex items-center gap-2">
+              <Activity className="w-4 h-4 text-primary" />
               Trade Distribution By Day
             </CardTitle>
           </CardHeader>
@@ -215,30 +215,30 @@ export const TemporalAnalytics: React.FC<TemporalAnalyticsProps> = ({ trades }) 
               <BarChart data={data.daysData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                 <XAxis 
                   dataKey="day" 
-                  tick={{ fill: '#64748b', fontSize: 10, fontFamily: 'monospace' }} 
+                  tick={{ fill: 'var(--muted-foreground)', fontSize: 10, fontFamily: 'monospace' }} 
                   axisLine={false} 
                   tickLine={false} 
                 />
                 <YAxis 
-                  tick={{ fill: '#64748b', fontSize: 10, fontFamily: 'monospace' }} 
+                  tick={{ fill: 'var(--muted-foreground)', fontSize: 10, fontFamily: 'monospace' }} 
                   axisLine={false} 
                   tickLine={false} 
                 />
                 <Tooltip 
-                  cursor={{ fill: '#ffffff0a' }}
-                  contentStyle={{ backgroundColor: '#0f172a', borderColor: '#1e293b', fontFamily: 'monospace', fontSize: 12 }}
+                  cursor={{ fill: 'var(--muted)' }}
+                  contentStyle={{ backgroundColor: 'var(--card)', borderColor: 'var(--border)', fontFamily: 'monospace', fontSize: 12 }}
                   formatter={(val: number) => [val, 'Trades']}
                 />
-                <Bar dataKey="tradesCount" fill="#38BDF8" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="tradesCount" fill="var(--primary)" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
 
         {/* Profit by Time Held (Scatter Plot) */}
-        <Card className="bg-[#1C1C1C] border-[#2D2D2D] shadow-2xl grainy-texture overflow-hidden relative xl:col-span-1">
+        <Card className="bg-card border-border shadow-sm grainy-texture overflow-hidden relative xl:col-span-1">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-[10px] uppercase font-black text-slate-400 tracking-widest flex items-center gap-2">
+            <CardTitle className="text-[10px] uppercase font-black text-muted-foreground tracking-widest flex items-center gap-2">
               <Timer className="w-4 h-4 text-purple-400" />
               Profit By Time Held
             </CardTitle>
@@ -246,13 +246,13 @@ export const TemporalAnalytics: React.FC<TemporalAnalyticsProps> = ({ trades }) 
           <CardContent className="h-64 px-4 pb-0">
             <ResponsiveContainer width="100%" height="100%">
               <ScatterChart margin={{ top: 10, right: 10, left: -20, bottom: 20 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#334155" opacity={0.5} vertical={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" opacity={0.5} vertical={false} />
                 <XAxis 
                   type="number" 
                   dataKey="duration" 
                   name="Duration (m)" 
                   unit="m" 
-                  tick={{ fill: '#64748b', fontSize: 10, fontFamily: 'monospace' }} 
+                  tick={{ fill: 'var(--muted-foreground)', fontSize: 10, fontFamily: 'monospace' }} 
                   axisLine={false} 
                   tickLine={false} 
                 />
@@ -261,17 +261,17 @@ export const TemporalAnalytics: React.FC<TemporalAnalyticsProps> = ({ trades }) 
                   dataKey="pnl" 
                   name="P&L" 
                   unit="$" 
-                  tick={{ fill: '#64748b', fontSize: 10, fontFamily: 'monospace' }} 
+                  tick={{ fill: 'var(--muted-foreground)', fontSize: 10, fontFamily: 'monospace' }} 
                   axisLine={false} 
                   tickLine={false} 
                 />
                 <Tooltip 
                   cursor={{ strokeDasharray: '3 3' }} 
-                  contentStyle={{ backgroundColor: '#0f172a', borderColor: '#1e293b', fontFamily: 'monospace', fontSize: 12 }}
+                  contentStyle={{ backgroundColor: 'var(--card)', borderColor: 'var(--border)', fontFamily: 'monospace', fontSize: 12 }}
                 />
                 <Scatter data={data.scatterData}>
                   {data.scatterData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.pnl >= 0 ? '#22C55E' : '#EF4444'} opacity={0.7} />
+                    <Cell key={`cell-${index}`} fill={entry.pnl >= 0 ? 'var(--success)' : 'var(--destructive)'} opacity={0.7} />
                   ))}
                 </Scatter>
               </ScatterChart>

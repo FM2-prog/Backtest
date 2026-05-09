@@ -175,7 +175,7 @@ export const StrategyRepository: React.FC<StrategyRepositoryProps> = ({ onBack }
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card className="bg-[#0B1120] border-slate-800 hover:border-slate-700 transition-all rounded-xl shadow-2xl relative overflow-hidden group h-full flex flex-col grainy-texture">
+              <Card className="bg-card border-border shadow-sm relative overflow-hidden group h-full flex flex-col grainy-texture">
                 <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                   <Target className="h-16 w-16" />
                 </div>
@@ -183,18 +183,18 @@ export const StrategyRepository: React.FC<StrategyRepositoryProps> = ({ onBack }
                 <CardContent className="p-6 flex flex-col h-full relative z-10">
                   <div className="flex items-start justify-between mb-6">
                     <div className="flex items-center gap-3">
-                      <div className="p-2 bg-slate-900 rounded-lg border border-slate-800 group-hover:border-primary/50 transition-colors">
+                      <div className="p-2 bg-muted rounded-lg border border-border group-hover:border-primary/50 transition-colors">
                         <Target className="h-5 w-5 text-primary" />
                       </div>
                       <div>
-                        <h3 className="font-bold text-white tracking-tight">{strategy.name}</h3>
-                        <p className="text-[10px] uppercase font-black text-slate-500 tracking-widest mt-0.5">
+                        <h3 className="font-bold text-foreground tracking-tight">{strategy.name}</h3>
+                        <p className="text-[10px] uppercase font-black text-muted-foreground tracking-widest mt-0.5">
                           BALANCE INIT: ${strategy.initialBalance.toLocaleString()}
                         </p>
                       </div>
                     </div>
                     {strategy.isPropFirm && (
-                      <Badge className="bg-white text-black hover:bg-white text-[9px] font-black uppercase px-2 py-0.5 tracking-tighter">
+                      <Badge className="bg-foreground text-background hover:bg-foreground/90 text-[9px] font-black uppercase px-2 py-0.5 tracking-tighter">
                         PROP FIRM SYNC
                       </Badge>
                     )}
@@ -202,27 +202,27 @@ export const StrategyRepository: React.FC<StrategyRepositoryProps> = ({ onBack }
 
                   <div className="space-y-4 mb-6 flex-1">
                     <div>
-                      <label className="text-[9px] uppercase font-black text-slate-500 mb-1.5 block tracking-widest">Entry Logic</label>
-                      <div className="bg-[#0D1117] p-3 rounded-lg border border-slate-800/50">
-                        <code className="text-[11px] font-mono text-slate-300 leading-relaxed block overflow-hidden text-ellipsis whitespace-nowrap">
+                      <label className="text-[9px] uppercase font-black text-muted-foreground mb-1.5 block tracking-widest">Entry Logic</label>
+                      <div className="bg-input p-3 rounded-lg border border-border">
+                        <code className="text-[11px] font-mono text-foreground leading-relaxed block overflow-hidden text-ellipsis whitespace-nowrap">
                           {strategy.rules.entry}
                         </code>
                       </div>
                     </div>
                     <div>
-                      <label className="text-[9px] uppercase font-black text-slate-500 mb-1.5 block tracking-widest">Exit Logic</label>
-                      <div className="bg-[#0D1117] p-3 rounded-lg border border-slate-800/50">
-                        <code className="text-[11px] font-mono text-slate-300 leading-relaxed block overflow-hidden text-ellipsis whitespace-nowrap">
+                      <label className="text-[9px] uppercase font-black text-muted-foreground mb-1.5 block tracking-widest">Exit Logic</label>
+                      <div className="bg-input p-3 rounded-lg border border-border">
+                        <code className="text-[11px] font-mono text-foreground leading-relaxed block overflow-hidden text-ellipsis whitespace-nowrap">
                           {strategy.rules.exit}
                         </code>
                       </div>
                     </div>
 
                     {strategy.isPropFirm && strategy.propConfig && (
-                      <div className="pt-4 border-t border-slate-800">
+                      <div className="pt-4 border-t border-border">
                         <div className="flex items-center gap-2 mb-2">
                           <Shield className="h-3 w-3 text-primary" />
-                          <span className="text-[10px] uppercase font-black text-white/90">
+                          <span className="text-[10px] uppercase font-black text-foreground/90">
                             RISK PARAMETERS ({strategy.propConfig.firmName})
                           </span>
                         </div>
@@ -240,7 +240,7 @@ export const StrategyRepository: React.FC<StrategyRepositoryProps> = ({ onBack }
                       onClick={() => {
                         setSelectedStrategy(strategy);
                       }}
-                      className="flex-1 bg-slate-900 border border-slate-800 hover:bg-slate-800 text-white font-black uppercase text-[10px] tracking-widest flex items-center justify-center gap-2"
+                      className="flex-1 bg-muted border border-border hover:bg-accent text-foreground font-black uppercase text-[10px] tracking-widest flex items-center justify-center gap-2"
                     >
                       <Briefcase className="h-3 w-3" />
                       View Performance
@@ -248,7 +248,7 @@ export const StrategyRepository: React.FC<StrategyRepositoryProps> = ({ onBack }
                     <Button 
                       size="icon" 
                       variant="outline" 
-                      className="border-slate-800 hover:bg-slate-800 text-slate-400 group relative"
+                      className="border-border hover:bg-muted text-muted-foreground group relative"
                       onClick={() => {
                         openEditModal(strategy);
                         // Scroll to top to see form
@@ -290,12 +290,12 @@ export const StrategyRepository: React.FC<StrategyRepositoryProps> = ({ onBack }
             }}
             className="group cursor-pointer xl:col-span-1"
           >
-              <div className="h-full min-h-[350px] border-2 border-dashed border-slate-800 rounded-xl flex flex-col items-center justify-center p-8 text-center hover:bg-slate-800/20 hover:border-slate-700 transition-all grainy-texture">
-                <div className="p-4 bg-slate-900/50 rounded-full border border-slate-800 mb-4 group-hover:scale-110 transition-transform relative z-10">
-                  <Zap className="h-8 w-8 text-slate-700 group-hover:text-primary transition-colors" />
+              <div className="h-full min-h-[350px] border-2 border-dashed border-border rounded-xl flex flex-col items-center justify-center p-8 text-center hover:bg-muted transition-all grainy-texture">
+                <div className="p-4 bg-muted rounded-full border border-border mb-4 group-hover:scale-110 transition-transform relative z-10">
+                  <Zap className="h-8 w-8 text-muted-foreground group-hover:text-primary transition-colors" />
                 </div>
-                <h3 className="text-white font-bold mb-2 relative z-10">Deploy New Logic</h3>
-                <p className="text-slate-500 text-xs max-w-[200px] leading-relaxed mx-auto relative z-10">
+                <h3 className="text-foreground font-bold mb-2 relative z-10">Deploy New Logic</h3>
+                <p className="text-muted-foreground text-xs max-w-[200px] leading-relaxed mx-auto relative z-10">
                   Define a new systematic rule-set to start capturing high-alpha data.
                 </p>
               </div>
