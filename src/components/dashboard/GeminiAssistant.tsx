@@ -95,7 +95,7 @@ export const GeminiAssistant: React.FC<GeminiAssistantProps> = ({ isOpen, onClos
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={onClose}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
+              className="fixed inset-0 bg-slate-900/20 dark:bg-black/60 backdrop-blur-sm z-50"
             />
           )}
           <motion.div
@@ -104,29 +104,29 @@ export const GeminiAssistant: React.FC<GeminiAssistantProps> = ({ isOpen, onClos
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
             className={cn(
-              "shadow-2xl flex flex-col transition-colors",
+              "shadow-xl flex flex-col transition-colors",
               isSidebarVariant 
-                ? "w-full h-full bg-sidebar border-0" 
-                : "fixed right-0 top-0 h-screen w-[400px] z-[60] bg-background border-l border-border"
+                ? "w-full h-full bg-white dark:bg-sidebar border-0" 
+                : "fixed right-0 top-0 h-screen w-[400px] z-[60] bg-white dark:bg-background border-l border-border"
             )}
           >
             {!isSidebarVariant && (
-              <CardHeader className="border-b border-border p-4 shrink-0 flex flex-row items-center justify-between bg-muted/50">
+              <CardHeader className="border-b border-border p-4 shrink-0 flex flex-row items-center justify-between bg-white dark:bg-muted/50">
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-slate-950">
                     <BrainCircuit className="h-5 w-5" />
                   </div>
                   <div>
-                    <CardTitle className="text-[11px] font-black text-foreground uppercase tracking-widest flex items-center gap-2">
+                    <CardTitle className="text-[11px] font-black text-slate-900 dark:text-foreground uppercase tracking-widest flex items-center gap-2">
                       Cortex Research Assistant
                     </CardTitle>
                     <div className="flex items-center gap-1.5 opacity-60">
                       <span className="w-1.5 h-1.5 rounded-full bg-success animate-pulse" />
-                      <span className="text-[9px] font-black uppercase tracking-tighter">Gemini v1.5 Flash Connected</span>
+                      <span className="text-[9px] font-black uppercase tracking-tighter text-slate-600 dark:text-foreground">Gemini v1.5 Flash Connected</span>
                     </div>
                   </div>
                 </div>
-                <Button variant="ghost" size="icon" onClick={onClose} className="h-8 w-8 hover:bg-destructive/10 hover:text-destructive">
+                <Button variant="ghost" size="icon" onClick={onClose} className="h-8 w-8 hover:bg-destructive/10 hover:text-destructive text-slate-700 dark:text-foreground">
                   <X className="h-5 w-5" />
                 </Button>
               </CardHeader>
@@ -148,8 +148,8 @@ export const GeminiAssistant: React.FC<GeminiAssistantProps> = ({ isOpen, onClos
                     <div className={cn(
                       "max-w-[85%] p-3 text-[11px] font-bold leading-relaxed shadow-sm",
                       m.role === 'user' 
-                        ? "bg-primary text-slate-950 rounded-l-xl rounded-tr-xl" 
-                        : "bg-muted border border-border text-foreground rounded-r-xl rounded-tl-xl"
+                        ? "bg-[#E0F2FE] dark:bg-primary text-[#0F172A] dark:text-slate-950 rounded-l-xl rounded-tr-xl" 
+                        : "bg-[#F8FAFC] dark:bg-muted border border-[#E2E8F0] dark:border-border text-[#0F172A] dark:text-foreground rounded-r-xl rounded-tl-xl"
                     )}>
                       {m.content}
                     </div>
@@ -164,24 +164,24 @@ export const GeminiAssistant: React.FC<GeminiAssistantProps> = ({ isOpen, onClos
               </div>
             </ScrollArea>
 
-            <div className="p-4 border-t border-border bg-muted/30">
+            <div className="p-4 border-t border-border bg-white dark:bg-muted/30">
               <div className="flex gap-2">
                 <Input 
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                   placeholder="Ask about Prop Firm limits or strategy bias..."
-                  className="bg-card border-border h-10 text-xs font-bold focus:ring-primary"
+                  className="bg-white dark:bg-card border-[#E2E8F0] dark:border-border h-10 text-xs font-bold focus:ring-primary text-[#0F172A] dark:text-foreground placeholder:text-[#64748B] dark:placeholder:text-muted-foreground"
                 />
                 <Button onClick={handleSend} disabled={loading} className="h-10 w-10 p-0 bg-primary text-slate-950">
                   <Send className="h-4 w-4" />
                 </Button>
               </div>
-              <div className="flex items-center justify-center gap-4 mt-3 opacity-40">
-                <div className="flex items-center gap-1 text-[9px] font-black uppercase tracking-tighter">
+              <div className="flex items-center justify-center gap-4 mt-3 opacity-80 dark:opacity-40">
+                <div className="flex items-center gap-1 text-[9px] font-black uppercase tracking-tighter text-slate-700 dark:text-foreground">
                   <ShieldCheck className="h-3 w-3" /> Rule Match
                 </div>
-                <div className="flex items-center gap-1 text-[9px] font-black uppercase tracking-tighter">
+                <div className="flex items-center gap-1 text-[9px] font-black uppercase tracking-tighter text-slate-700 dark:text-foreground">
                   <Sparkles className="h-3 w-3 text-primary" /> Alpha Insight
                 </div>
               </div>

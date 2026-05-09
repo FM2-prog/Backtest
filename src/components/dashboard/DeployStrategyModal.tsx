@@ -76,7 +76,7 @@ export const DeployStrategyModal: React.FC<DeployStrategyModalProps> = ({
               variant="ghost" 
               size="icon" 
               onClick={onClose} 
-              className="absolute -top-12 right-0 text-slate-400 hover:text-white"
+              className="absolute -top-12 right-0 text-slate-400 hover:text-foreground"
             >
               <X className="w-6 h-6" />
             </Button>
@@ -91,10 +91,10 @@ export const DeployStrategyModal: React.FC<DeployStrategyModalProps> = ({
               </div>
               <div className="px-6 py-4 border-b border-border flex justify-between items-center bg-card">
                 <div>
-                  <h2 className="text-xl font-black uppercase tracking-widest text-white">
+                  <h2 className="text-xl font-black uppercase tracking-widest text-foreground">
                     {isEditing ? 'EDIT STRATEGY' : 'DEPLOY NEW STRATEGY'}
                   </h2>
-                  <p className="text-slate-400 font-mono text-[10px] mt-1">Configure your systematic edge and parameters.</p>
+                  <p className="text-muted-foreground font-mono text-[10px] mt-1">Configure your systematic edge and parameters.</p>
                 </div>
               </div>
               
@@ -145,7 +145,7 @@ export const DeployStrategyModal: React.FC<DeployStrategyModalProps> = ({
 
                   <div className="flex items-center justify-between p-4 rounded-xl bg-background border border-border">
                     <div className="space-y-1">
-                      <Label className="text-[11px] font-black uppercase text-white">Prop Firm Sync</Label>
+                      <Label className="text-[11px] font-black uppercase text-foreground">Prop Firm Sync</Label>
                       <p className="text-[10px] text-slate-500 font-mono">Enable funding rules evaluation</p>
                     </div>
                     <Switch 
@@ -211,8 +211,8 @@ export const DeployStrategyModal: React.FC<DeployStrategyModalProps> = ({
                       onClick={() => setIsChatOpen(!isChatOpen)}
                       className={cn(
                         "w-full h-11 font-black uppercase text-[10px] tracking-widest flex justify-center items-center gap-2 transition-all mt-4",
-                        isChatOpen 
-                         ? "bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700 hover:text-white" 
+                         isChatOpen 
+                         ? "bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-300 border-slate-300 dark:border-slate-700 hover:bg-slate-300 dark:hover:bg-slate-700 hover:text-foreground" 
                          : "bg-primary/10 text-primary border-primary/30 hover:bg-primary/20"
                       )}
                     >
@@ -246,14 +246,14 @@ export const DeployStrategyModal: React.FC<DeployStrategyModalProps> = ({
                     <h2 className="text-sm font-black uppercase tracking-widest text-primary">
                       CORTEX RESEARCH ASSISTANT
                     </h2>
-                    <p className="text-slate-400 font-mono text-[9px] mt-0.5">Real-time strategy validation and insight.</p>
+                    <p className="text-muted-foreground font-mono text-[9px] mt-0.5">Real-time strategy validation and insight.</p>
                   </div>
                 </div>
                 <Button 
                   variant="ghost" 
                   size="icon" 
                   onClick={() => setIsChatOpen(false)} 
-                  className="text-slate-400 hover:text-white shrink-0"
+                  className="text-slate-500 dark:text-slate-400 hover:text-foreground shrink-0"
                 >
                   <X className="w-4 h-4" />
                 </Button>

@@ -129,9 +129,10 @@ export default function App() {
 
           <Button 
             onClick={() => setIsAssistantOpen(true)}
-            className="h-9 gap-2 text-[10px] font-black uppercase tracking-widest bg-primary text-slate-950 px-4"
+            variant="outline"
+            className="h-9 gap-2 text-[10px] font-black uppercase tracking-widest text-foreground hover:text-foreground border-border bg-background"
           >
-            <BrainCircuit className="h-4 w-4" />
+            <BrainCircuit className="h-4 w-4 text-primary" />
             Gemini Assistant
           </Button>
         </div>
