@@ -1,6 +1,6 @@
 <img width="2816" height="1536" alt="Gemini_Generated_Image_gmmmbugmmmbugmmm (1)" src="https://github.com/user-attachments/assets/6f0a30cb-7438-4c16-8f6a-ddf1987b432e" />
 
-QUANTAUDIR 
+QUANTAUDIT
 
 Tired of juggling dozens of backtesting subscriptions or lacking the initial capital for those expensive platforms?
 
