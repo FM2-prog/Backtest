@@ -1,5 +1,4 @@
-<img width="2816" height="1536" alt="Gemini_Generated_Image_gmmmbugmmmbugmmm (1)" src="https://github.com/user-attachments/assets/a1713c18-084c-462f-a24e-b42c6c87040b" />
-
+<img width="2816" height="1536" alt="Gemini_Generated_Image_gmmmbugmmmbugmmm (1)" src="https://github.com/user-attachments/assets/6f0a30cb-7438-4c16-8f6a-ddf1987b432e" />
 
 QUANTAUDIR 
 
